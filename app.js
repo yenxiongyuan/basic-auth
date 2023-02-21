@@ -6,14 +6,17 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const base64 = require('base-64');
 const { Sequelize, DataTypes } = require('sequelize');
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3002;
 // Prepare the express app
 const app = express();
 
 // Process JSON input and put the data on req.body
 app.use(express.json());
 
-const sequelize = new Sequelize(process.env.DATABASE_URL);
+//database URL set up (test or dev)
+const DATABASE_URL = process.env.NODE_ENV === 'test'?'sqlite::memory':process.env.DATABASE_URL;
+
+const sequelize = new Sequelize(DATABASE_URL);
 
 // Process FORM intput and put the data on req.body
 app.use(express.urlencoded({ extended: true }));
