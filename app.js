@@ -30,7 +30,7 @@ const Users = sequelize.define('User', {
   password: {
     type: DataTypes.STRING,
     allowNull: false,
-  }
+  },
 });
 
 // Signup Route -- create a new user
@@ -90,7 +90,7 @@ app.post('/signin', async (req, res) => {
 // make sure our tables are created, start up the HTTP server.
 sequelize.sync()
   .then(() => {
-    app.listen(PORT, () => console.log("server running on port", PORT));
+    app.listen(PORT, () => console.log('server running on port', PORT));
   }).catch(e => {
     console.error('Could not start server', e.message);
   });
